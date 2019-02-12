@@ -1,0 +1,27 @@
+#programNavMain{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 98.5vh;
+  border-left: 1px solid black;
+}
+#programsNav{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+
+}
+#programNavOp{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.btn-lg{
+  margin: 5px;
+  border: 3px solid;
+  -webkit-text-stroke: medium;
+}
+.btn-lg:hover{
+  cursor: pointer;
+
+}

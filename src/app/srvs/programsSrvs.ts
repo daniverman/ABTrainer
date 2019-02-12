@@ -4,6 +4,7 @@ import {Program} from '../classes/program';
 import {forEach} from '@angular/router/src/utils/collection';
 import {Muscle} from '../classes/muscle';
 import {ExeSrvs} from './exeSrvs';
+import {Observable, ReplaySubject, Subject} from 'rxjs/index';
 
 @Injectable({providedIn: 'root'})
 export class ProgramsSrvs {
@@ -11,9 +12,22 @@ export class ProgramsSrvs {
   idHelper = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
   total: Program;
   chosenProgramId = '';
+  programChange: Subject<boolean> = new Subject();
 
   constructor(exeSrvs: ExeSrvs) {
     this.total = new Program('Total');
+  }
+
+  get_program_change() {
+    return this.programChange.asObservable();
+  }
+
+  set_program_change() {
+    if (this.programChange) {
+      this.programChange.next(false);
+    } else {
+      this.programChange.next(true);
+    }
   }
 
   add_program(program: Program) {
@@ -81,6 +95,7 @@ export class ProgramsSrvs {
       });
       this.total = newTotal;
     });
+    this.set_program_change();
   }
 
   private updateId() {
@@ -90,19 +105,19 @@ export class ProgramsSrvs {
   }
 
   private updateProgramBody(programId, exe: ExeCard, repeats) {
-    let prog;
+
     this.programCollection.forEach(program => {
       if (program.programId === programId) {
-        prog = program;
+        exe.muscle_impact.forEach((impact, muscle) => {
+          const muscleId = muscle;
+          const impactPrec = impact;
+          program.updateMuscleImpact(muscleId, impactPrec, exe.id, repeats);
+          this.update_total_body();
+        });
       }
-    });
-    exe.muscle_impact.forEach((impact, muscle) => {
-      // check what is muscle a key or key value tuple;
-      const muscleId = muscle;
-      const impactPrec = impact;
-      prog.updateMuscleImpact(muscleId, impactPrec, exe.id, repeats);
-      this.update_total_body();
-    });
+
+    }, this.programCollection);
+    this.set_program_change();
   }
 
   private update_total_body() {

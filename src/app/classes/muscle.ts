@@ -1,13 +1,16 @@
 export class Muscle {
   public area = {
     d: '',
-    class: '',
+    style: '',
     id: ''
   };
   id = '';
-  private name = '';
   total_percentage = 0.0;
   exeId_percentage_map = new Map();
+  style_arr = [
+    ['fill', 'red'], ['stroke', '#000000'], ['stroke-width', '1px'], ['stroke-linecap', 'butt'],
+    ['stroke-linejoin', 'miter'], ['stroke-opacity', '1'], ['fill-opacity', '0']];
+  private name = '';
 
   constructor(area, id, name) {
     this.area = area;
@@ -26,6 +29,28 @@ export class Muscle {
     this.exeId_percentage_map.forEach((value, key) => {
       this.total_percentage += value;
     });
+    this.update_style('fill-opacity');
+  }
+
+  update_style(attr) {
+    this.style_arr.forEach(value => {
+      if (value[0] === attr) {
+        value[1] = this.total_percentage.toString();
+      }
+    }, this.style_arr);
+    this.area.style = this.style_arr_to_string(this.style_arr);
+  }
+
+  style_arr_to_string(arr) {
+    let style_string = '';
+    arr.forEach(data => {
+      const name = data[0];
+      const value = data[1];
+      const to_add = name + ':' + value + ';';
+      style_string += to_add;
+    });
+
+    return style_string;
   }
 
 }
@@ -35,7 +60,7 @@ export class Body {
 
   constructor() {
     const upper_chest_area = {
-        style: 'fill:red;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1',
+        style: 'fill:red;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:0;',
         d: 'm 468.21136,282.35542 -6.26412,-6.57733 -3.44527,-4.54149 -2.34906,-5.63771 c -2.36876,-4.37239 -1.19331,-5.56548 -4.85469,' +
         '-11.74524 -0.96464,-3.33997 -5.12769,-8.25614 -9.55279,-9.39619 l -21.92444,-6.89053 -9.23958,-3.28867 -17.22634,' +
         '-0.1566 -21.14142,4.07168 c 0.86061,-5.00143 13.74234,-3.97541 2.50565,-14.8773 l 25.36971,0.15661 c 7.63584,' +

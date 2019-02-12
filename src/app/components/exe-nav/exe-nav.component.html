@@ -1,0 +1,8 @@
+<div class="list-group" id="exeNavGroupList" role="tablist">
+  <div *ngFor="let card of toShowCards" data-toggle="list" >
+    <div class="card bg-light" (click)="click($event)" id="{{card.id}}" >
+      <img src="{{card.src}}" class="card-img-bottom" id="{{card.id}}_Img">
+      <h3 class="card-title" id="{{card.id}}_Title">{{card.title}}</h3>
+    </div>
+  </div>
+</div>

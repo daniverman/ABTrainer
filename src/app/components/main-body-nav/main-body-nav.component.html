@@ -1,0 +1,6 @@
+<div class="container" id="mainBodyNav">
+  <app-bodynav (messageEvent)="receiveBodyNavClick($event)"></app-bodynav>
+  <app-sub-body-nav (messageEvent)="receiveSubBodyNavClick($event)" [data]="chosen_group_muscle_id" *ngIf="show_sub_body_nav"></app-sub-body-nav>
+  <app-exe-nav [data]="chosen_sub_muscle_id" (messageEvent)="receiveExeNavClick($event)" *ngIf="show_exe_nav"></app-exe-nav>
+  <app-exe-view *ngIf="show_exe_view"></app-exe-view>
+</div>

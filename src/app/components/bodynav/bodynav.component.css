@@ -1,0 +1,22 @@
+#bodyNavMain{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: white;
+  height: 98.5vh;
+  border-right: 2px solid black;
+
+}
+
+.card{
+  border: 2px dashed gray;
+  margin: 10px;
+  border-radius: 20px;
+  text-align: center;
+}
+.card:hover{
+  border-color: red;
+  color: red;
+  cursor: pointer;
+
+}

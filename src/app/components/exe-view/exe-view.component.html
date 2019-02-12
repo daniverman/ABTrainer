@@ -1,0 +1,32 @@
+<div class="container" id="exeViewContainer">
+  <div class="col">
+    <div class="row">
+      <img  class="img-thumbnail" src="{{exe.muscles_overall}}">
+    </div>
+    <div class="row">
+      <h2 class="h2">{{exe.description.about_title}}</h2>
+      <ul>
+        <li *ngFor="let line of exe.description.about_content">
+            {{line}}.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="col">
+    <div class="row">
+      <div class="video">
+        <div [innerHtml]="video"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="submit_exe">
+        <h2 class="h2">Select number of sets : </h2>
+        <h2 class="h2" style="font-weight: bolder">{{sets}}</h2>
+        <ng5-slider [value]="sets" (valueChange)="sets_change($event)"
+                    [options]="{floor:0 ,ceil:6,showTicks:true}"></ng5-slider>
+        <button class="btn-outline-primary btn-lg" id="add_exe_btn" (click)="add()">Add or Update to Program</button>
+      </div>
+    </div>
+  </div>
+</div>

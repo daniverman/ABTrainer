@@ -1,0 +1,40 @@
+#exeViewContainer{
+  display: flex;
+  flex-direction: row;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 49vh;
+  border: 1px solid black;
+  justify-items: stretch;
+
+}
+ul{
+  list-style-type: decimal;
+}
+.col {
+  flex-basis: 100%;
+  background-color: cornflowerblue;
+  border: 1px solid black;
+  justify-items: stretch;
+}
+
+@media screen and (min-width: 800px) {
+  .col {
+    flex: 1;
+  }
+}
+
+.submit_exe{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.video{
+
+}
